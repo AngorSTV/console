@@ -11,10 +11,13 @@ int main() {
 	con.clear();
 
 	int k = 0;
+	char u;
 
-	for (int i = 0; i < 16; i++) {
+	for (int i = 0; i < 40; i++) {
 		con.setColor(0, i);
-		cout << " ";
+		con.setCursor(0, i);
+		cout << "                            ";
 		k++;
 	}
+	cin >> u;
 }

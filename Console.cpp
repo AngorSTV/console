@@ -24,12 +24,17 @@
 	void Console::clear() {
 		COORD topLeft = { 0, 0 };
 		CONSOLE_SCREEN_BUFFER_INFO screen;
+		CONSOLE_CURSOR_INFO structCursorInfo;
 		DWORD written;
 		GetConsoleScreenBufferInfo(hOut, &screen);
 		FillConsoleOutputCharacterA(hOut, ' ', screen.dwSize.X * screen.dwSize.Y, topLeft, &written);
 		FillConsoleOutputAttribute(hOut, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_BLUE,
 			screen.dwSize.X * screen.dwSize.Y, topLeft, &written);
 		SetConsoleCursorPosition(hOut, topLeft);
+		
+		GetConsoleCursorInfo(hOut, &structCursorInfo);
+		structCursorInfo.bVisible = FALSE;
+		SetConsoleCursorInfo(hOut, &structCursorInfo);
 	}
 
 	void Console::setColor(UCHAR fontColor, UCHAR backColor) {
